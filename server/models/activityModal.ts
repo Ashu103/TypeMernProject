@@ -11,15 +11,21 @@ const ActivitySchema: Schema = new Schema({
     type: String,
     required: [true, "Please add a text value"],
   },
-  calories: {
+  duration: {
+    //Instead of calories i should write hormones here
     type: Number,
     required: [true, "Please add a  numeric value"],
   },
   doer: {
     type: Schema.Types.ObjectId,
     ref: "User",
-    required:true
   },
+  hormone: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Hormone",
+    },
+  ],
 });
 
 const Activity = mongoose.model<IActivity>("Activity", ActivitySchema);

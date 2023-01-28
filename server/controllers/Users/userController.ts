@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import asyncHandler from "express-async-handler";
 import User from "../../models/userModal";
-import { IUser } from "../../types/User";
+import { IUserRequest, IUser } from "../../types/User";
 import generateToken from "../../utils/generateToken";
 import bcrypt from "bcrypt";
+import { access } from "fs";
 //@Desc Register User
 //@Route /api/users/register
 //@Method POST
@@ -66,3 +67,20 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
     throw new Error("Invalid credentials");
   }
 });
+
+//desc Get User data
+//@route GET /api/users/me
+//@access Private
+
+export const getUser = asyncHandler(
+  async (req: IUserRequest, res: Response) => {
+    let user = await User.findById(req.user.id);
+    res.status(200).json({
+      user,
+    });
+  }
+);
+
+//desc Login User with Github
+//@route Post /api/users/githubLogin
+//@access Public

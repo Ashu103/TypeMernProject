@@ -34,3 +34,5 @@ const protect = asyncHandler(
     }
   }
 );
+
+module.exports = { protect };

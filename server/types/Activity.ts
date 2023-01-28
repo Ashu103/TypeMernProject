@@ -7,8 +7,7 @@ import { IUser } from "./User";
 export interface IActivity extends Document {
   action: String;
   calories: Number;
-  doer: IUser;
-  
+  doer: IUser; 
 }
 
 export interface IActivityRequest extends Request {
